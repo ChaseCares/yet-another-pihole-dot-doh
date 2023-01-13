@@ -40,7 +40,7 @@ If `DNS1` and `DNS2` are present, remove them and add a new variable with the fo
 + Default Value: 127.1.1.1#5153;127.2.2.2#5253
 + Description: Upstream DNS servers
 
-[Add environmental variable](./img/unraid_add_variable.png)
+![Add environmental variable](./img/unraid_add_variable.png)
 
 If `ServerIP` or `FTLCONF_REPLY_ADDR4` and/or `ServerIPv6` or `FTLCONF_REPLY_ADDR6` are present, remove them and do the following:
 
