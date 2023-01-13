@@ -1,7 +1,7 @@
 <!-- yet-another-pihole-dot-doh by ChaseCares -->
 # Yet Another Pi-hole DoT DoH
 
-This repository extends the official [Pi-hole](https://github.com/pi-hole/docker-pi-hole) image, by adding [Cloudflared](https://github.com/cloudflare/cloudflaredi) for [DNS-Over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) and [Stubby](https://github.com/getdnsapi/stubby) for [DNS-Over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS).
+This repository extends the official [Pi-hole](https://github.com/pi-hole/docker-pi-hole) image, by adding [Cloudflared](https://github.com/cloudflare/cloudflared) for [DNS-Over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) and [Stubby](https://github.com/getdnsapi/stubby) for [DNS-Over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS).
 
 ## Features
 
