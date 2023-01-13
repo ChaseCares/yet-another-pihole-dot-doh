@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+s6-echo "Starting cloudflared"
+
+cp --no-clobber /tmp/config/cloudflared.yml /config/cloudflared.yml
+cloudflared --config /config/cloudflared.yml

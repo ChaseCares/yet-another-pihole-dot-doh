@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+s6-echo "Stopping stubby"
+killall -9 stubby
+s6-echo "Stopped stubby"

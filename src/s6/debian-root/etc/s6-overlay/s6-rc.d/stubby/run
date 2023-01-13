@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+s6-echo "Starting stubby"
+cp --no-clobber /tmp/config/stubby.yml /config/stubby.yml
+stubby -C /config/stubby.yml

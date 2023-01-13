@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+s6-echo "Stopping cloudflared"
+killall -9 cloudflared
+s6-echo "Stopped cloudflared"
