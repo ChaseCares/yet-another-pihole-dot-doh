@@ -74,6 +74,8 @@ jobs:
         with:
           context: ./src/
           platforms: linux/amd64, linux/arm64, linux/386, linux/arm/v7, linux/arm/v6
+          build-args: |
+            PIHOLE_DOCKER_TAG=${{ needs.docker_meta.outputs.version }}
           push: true
           provenance: false
           tags: ${{ needs.docker_meta.outputs.tags }}
