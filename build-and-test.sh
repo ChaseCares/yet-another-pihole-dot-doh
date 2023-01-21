@@ -54,7 +54,7 @@ function check_rc() {
     fi
 }
 
-pararser "$@"
+arg_pararser "$@"
 
 cp -r ./src/config ./src/test/
 cp -r ./src/s6 ./src/test/
