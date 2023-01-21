@@ -1,15 +1,11 @@
-ARG FRM='pihole/pihole'
 ARG TAG='latest'
-
-FROM ${FRM}:${TAG}
-LABEL maintainer="ChaseCares"
+FROM ghcr.io/pi-hole/pihole:${TAG}
 
 ARG TARGETARCH
 
 ADD https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${TARGETARCH}.deb /tmp/cloudflared-linux-${TARGETARCH}.deb
 
-RUN apt-get update && apt-get install -y \
-    stubby && \
+RUN apt-get update && apt-get install -y stubby && \
     dpkg --add-architecture ${TARGETARCH} && \
     apt-get install /tmp/cloudflared-linux-${TARGETARCH}.deb && \
     useradd -s /usr/sbin/nologin -r -M cloudflared && \
