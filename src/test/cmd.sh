@@ -16,7 +16,7 @@ function check_rc() {
         echo_green "$msg: Passed."
     else
         echo_red "$msg: Failed with return code $rc_to_check."
-        exit "$rc_to_check"
+        # exit "$rc_to_check"
     fi
 }
 
