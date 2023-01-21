@@ -67,7 +67,7 @@ check_rc $? "Docker build"
 current_timezone=$(cat /etc/timezone)
 echo_green "Current timezone: $current_timezone"
 
-docker run -e TZ="$current_timezone" -ti "$docker_name":"$docker_tag"
+docker run -e TZ="$current_timezone" "$docker_name:$docker_tag"
 check_rc $? "Docker run"
 
 if [ "$clean_up" = "true" ]; then
