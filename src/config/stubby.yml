@@ -122,7 +122,7 @@ idle_timeout: 10000
 # specify a different port
 listen_addresses:
   - 127.2.2.2@5253
-
+  - 0::1@5253
 
 ############################### DNSSEC SETTINGS ################################
 # Require DNSSEC validation. This will withhold answers with BOGUS DNSSEC
@@ -371,11 +371,11 @@ upstream_recursive_servers:
 #    tls_auth_name: "cloudflare-dns.com"
 #  - address_data: 2606:4700:4700::1001
 #    tls_auth_name: "cloudflare-dns.com"
-## Google
-#  - address_data: 2001:4860:4860::8888
-#    tls_auth_name: "dns.google"
-#  - address_data: 2001:4860:4860::8844
-#    tls_auth_name: "dns.google"
+# Google
+  - address_data: 2001:4860:4860::8888
+    tls_auth_name: "dns.google"
+  - address_data: 2001:4860:4860::8844
+    tls_auth_name: "dns.google"
 ## Adguard Default servers
 #  - address_data: 2a00:5a60::ad1:0ff
 #    tls_auth_name: "dns.adguard.com"

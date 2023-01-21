@@ -28,15 +28,21 @@ echo_green "Running tests..."
 pgrep -x 'cloudflared' >/dev/null
 check_rc $? "\tcloudflared process check"
 
-dig -p 5153 @127.1.1.1 +short +time=1 +tries=1 one.one.one.one | grep -q '1.1.1.1'
-check_rc $? "\tcloudflared DNS check"
+dig A -4 -p 5153 +short +time=1 +tries=1 one.one.one.one | grep -q '1.1.1.1'
+check_rc $? "\tcloudflared DNS IPv4 check"
+
+dig AAAA -6 -p 5153 +short +time=1 +tries=1 one.one.one.one | grep -q '2606:4700:4700::1111'
+check_rc $? "\tcloudflared DNS IPv6 check"
 
 # Stubby tests
 pgrep -x 'stubby' >/dev/null
 check_rc $? "\tstubby DNS check"
 
-dig -p 5253 @127.2.2.2 +short +time=1 +tries=1 one.one.one.one | grep -q '1.1.1.1'
-check_rc $? "\tstubby DNS check"
+dig A -4 -p 5253 @127.2.2.2 +short +time=1 +tries=1 one.one.one.one | grep -q '1.1.1.1'
+check_rc $? "\tstubby DNS IPv4 check"
+
+dig AAAA -6 -p 5253 @::1 +short +time=1 +tries=1 one.one.one.one | grep -q '2606:4700:4700::1111'
+check_rc $? "\tstubby DNS IPv6 check"
 
 echo_green "All tests passed!"
 exit 0
