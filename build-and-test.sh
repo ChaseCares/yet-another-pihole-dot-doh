@@ -61,7 +61,7 @@ cp -r ./src/s6 ./src/test/
 
 cat ./src/Dockerfile ./src/test/COPY-RUN-CMD >./src/test/Dockerfile
 
-docker build --no-cache --build-arg TAG="$pihole_target_tag" --build-arg TARGETARCH="$target_arch" --tag "$docker_name":"$docker_tag" ./src/test/
+docker build --no-cache --build-arg TAG="$pihole_target_tag" --build-arg TARGETARCH="$target_arch" --tag "$docker_name:$docker_tag" ./src/test/
 check_rc $? "Docker build"
 
 current_timezone=$(cat /etc/timezone)
