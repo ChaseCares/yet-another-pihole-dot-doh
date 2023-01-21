@@ -20,7 +20,7 @@ function check_rc() {
     fi
 }
 
-sleep 1s
+sleep 2s
 
 echo_green "Running tests..."
 
