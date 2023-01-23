@@ -8,6 +8,7 @@ on:
 
 jobs:
   setup-and-check:
+    name: 'Setup and Check for a New Release'
     runs-on: ubuntu-latest
     steps:
     -

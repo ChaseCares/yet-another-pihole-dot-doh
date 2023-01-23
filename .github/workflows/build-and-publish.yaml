@@ -16,6 +16,7 @@ jobs:
     steps:
       -
         name: 'Collect metadata'
+        id: docker-meta
         uses: docker/metadata-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
