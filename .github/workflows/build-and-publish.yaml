@@ -42,7 +42,9 @@ jobs:
 
   build-and-publish:
     name: 'Build New Release'
-    needs: test-release
+    needs:
+      - test-release
+      - docker-meta
     runs-on: ubuntu-latest
     steps:
       -
