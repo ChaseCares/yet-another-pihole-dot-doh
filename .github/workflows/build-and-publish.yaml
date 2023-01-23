@@ -1,4 +1,5 @@
-name: Build, Test and Publish
+name: 'Build, Test and Publish'
+run-name: 'Build, Test and Publish'
 
 on:
   release:
@@ -6,81 +7,76 @@ on:
 
 jobs:
   docker-meta:
+    name: 'Collect and Export Docker metadata'
     runs-on: ubuntu-latest
     outputs:
-      tags: ${{ steps.meta.outputs.tags }}
-      labels: ${{ steps.meta.outputs.labels }}
-      version: ${{ steps.meta.outputs.version }}
+      tags: ${{ steps.docker-meta.outputs.tags }}
+      labels: ${{ steps.docker-meta.outputs.labels }}
+      version: ${{ steps.docker-meta.outputs.version }}
     steps:
       -
-        name: Docker meta
-        id: meta
+        name: 'Collect metadata'
         uses: docker/metadata-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           images: |
             ${{ vars.DOCKERHUB_NAMESPACE }}/yet-another-pihole-dot-doh
             ghcr.io/${{ github.repository_owner }}/yet-another-pihole-dot-doh
-          flavor: |
-            latest=auto
+          flavor: latest=auto
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=tag
 
   test-release:
+    name: 'Build and Test New Release'
     runs-on: ubuntu-latest
-    needs: docker_meta
+    needs: docker-meta
     steps:
       -
-        name: Checkout
+        name: 'Checkout'
         uses: actions/checkout@v3
       -
-        name: Run Tests
-        run: |
-          echo "Building image to test"
-          ./build-and-test.sh --pihole_target_tag ${{ needs.docker_meta.outputs.version }}
+        name: 'Build Test Image and Run Tests'
+        run: ./build-and-test.sh --pihole_target_tag ${{ needs.docker-meta.outputs.version }}
 
   build-and-publish:
-    needs:
-              - docker_meta
-              - test_release
+    name: 'Build New Release'
+    needs: test-release
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
+        name: 'Checkout'
         uses: actions/checkout@v3
       -
-        name: Set up QEMU
+        name: 'Set up QEMU'
         uses: docker/setup-qemu-action@v2
       -
-        name: Set up Docker Buildx
+        name: 'Set up Docker Buildx (buildkit:v0.10.6)'
         uses: docker/setup-buildx-action@v2
+        # temporary, see https://github.com/docker/build-push-action/issues/761
         with:
-          driver-opts: |
-            image=moby/buildkit:v0.10.6
+          driver-opts: image=moby/buildkit:v0.10.6
       -
-        name: Login to DockerHub
+        name: 'Login to DockerHub'
         uses: docker/login-action@v2
         with:
           username: ${{ vars.DOCKERHUB_NAMESPACE }}
           password: ${{ secrets.DOCKERHUB_PASS }}
       -
-        name: Login to GitHub Container Registry
+        name: 'Login to GitHub Container Registry'
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
-        name: Build and push
+        name: 'Build Images and Push'
         uses: docker/build-push-action@v3
         with:
           context: ./src/
           platforms: linux/amd64, linux/arm64, linux/386, linux/arm/v7, linux/arm/v6
-          build-args: |
-            PIHOLE_DOCKER_TAG=${{ needs.docker_meta.outputs.version }}
+          build-args: PIHOLE_DOCKER_TAG=${{ needs.docker-meta.outputs.version }}
           push: true
           provenance: false
-          tags: ${{ needs.docker_meta.outputs.tags }}
-          labels: ${{ needs.docker_meta.outputs.labels }}
-
+          tags: ${{ needs.docker-meta.outputs.tags }}
+          labels: ${{ needs.docker-meta.outputs.labels }}
