@@ -3,8 +3,17 @@
 
 This repository extends the official [Pi-hole](https://github.com/pi-hole/docker-pi-hole) image, by adding [Cloudflared](https://github.com/cloudflare/cloudflared) for [DNS-Over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) and [Stubby](https://github.com/getdnsapi/stubby) for [DNS-Over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS).
 
+[![Release Checker](https://github.com/ChaseCares/yet-another-pihole-dot-doh/actions/workflows/release-checker.yml/badge.svg)](https://github.com/ChaseCares/yet-another-pihole-dot-doh/actions/workflows/release-checker.yml) [![Build, Test and Publish](https://github.com/ChaseCares/yet-another-pihole-dot-doh/actions/workflows/build-and-publish.yaml/badge.svg)](https://github.com/ChaseCares/yet-another-pihole-dot-doh/actions/workflows/build-and-publish.yaml)
+
+Available from:
+
++ Docker Hub: `chasecares/yet-another-pihole-dot-doh:latest`
++ GitHub Containers: `ghcr.io/chasecares/yet-another-pihole-dot-doh:latest`
+
 ## Features
 
++ Always up to date with upstream Pi-hole
++ Post build testing for Cloudflared and Stubby
 + Multi-architecture support (386, x86-64, arm, amd, arm64)
 + Only 56MB of additional space over official Pi-hole image
 + Cloudflared for DNS-Over-HTTPS
