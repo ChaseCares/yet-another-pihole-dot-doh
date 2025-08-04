@@ -34,4 +34,4 @@ jobs:
           --auth ${{ secrets.FINE_GRAINED_TOKEN }} \
           --target-repo ${{ secrets.TARGET_OWNER_REPO }} \
           --local-repo ${{ secrets.LOCAL_OWNER_REPO }} \
-          --discord_webhook ${{ secrets.DISCORD_WEBHOOK }}
+          --discord-webhook ${{ secrets.DISCORD_WEBHOOK }}
